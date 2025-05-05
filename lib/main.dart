@@ -92,6 +92,41 @@ class _InfoBoxUpdateState extends State<InfoBoxUpdater> {
     DateTime(2025, 5, 10),
   };
 
+  void posT(BuildContext context) {
+    Card(
+      elevation: 4,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: TableCalendar(
+          firstDay: DateTime.utc(2024, 1, 1),
+          lastDay: DateTime.utc(2030, 12, 31),
+          focusedDay: _focusedDay,
+          selectedDayPredicate: (day) {
+            return _selectedDay != null && isSameDay(_selectedDay!, day);
+          },
+          onDaySelected: (selectedDay, focusedDay) {
+            setState(() {
+              _selectedDay = selectedDay;
+              _focusedDay = focusedDay;
+            });
+          },
+          calendarStyle: const CalendarStyle(
+            todayDecoration: BoxDecoration(
+              color: Colors.orange,
+              shape: BoxShape.circle,
+            ),
+            selectedDecoration: BoxDecoration(
+              color: Colors.green,
+              shape: BoxShape.circle,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   /// validando datas
   bool isSameDay(DateTime a, DateTime b) {
     return a.year == b.year && a.month == b.month && a.day == b.day;
@@ -168,7 +203,7 @@ class _InfoBoxUpdateState extends State<InfoBoxUpdater> {
           ),
 
           // Segundo Card: Calendário
-          Card(
+          /* Card(
             elevation: 4,
             color: Colors.white,
             shape: RoundedRectangleBorder(
@@ -201,7 +236,7 @@ class _InfoBoxUpdateState extends State<InfoBoxUpdater> {
                 ),
               ),
             ),
-          ),
+          ),*/
         ],
       ),
     );
